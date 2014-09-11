@@ -5,6 +5,7 @@
 #include "modules/CylindersModule.h"
 #include "modules/PerlinModule.h"
 #include "modules/RidgedMultiModule.h"
+#include "modules/SpheresModule.h"
 #include "modules/VoronoiModule.h"
 
 using namespace GarrysMod::Lua;
@@ -36,6 +37,7 @@ GMOD_MODULE_OPEN() {
 			Modules::CylindersModule::Register(state);
 			Modules::PerlinModule::Register(state);
 			Modules::RidgedMultiModule::Register(state);
+			Modules::SpheresModule::Register(state);
 			Modules::VoronoiModule::Register(state);
 		LUA->SetField(-2, "libnoise");
 
