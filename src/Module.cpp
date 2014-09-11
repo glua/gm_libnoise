@@ -1,21 +1,18 @@
 #include "Module.h"
+#include "modules/BillowModule.h"
 
 using namespace GarrysMod::Lua;
 
-int testFunction(lua_State *state) {
-	noise::module::Perlin perlin;
-	perlin.SetSeed(0);
-	perlin.SetFrequency(4.0);
-	perlin.SetOctaveCount(1);
+void AddMethod(lua_State *state, GarrysMod::Lua::CFunc func, const char *name) {
+	LUA->PushCFunction(func);
+	LUA->SetField(-2, name);
+}
 
-	double x = LUA->GetNumber(1);
-	double y = LUA->GetNumber(2);
+Vector *GetVector(lua_State *state, int stackPos) {
+	LUA->CheckType(stackPos, Type::VECTOR);
 
-	printf("Woop: %f, %f", x, y);
-
-	double value = perlin.GetValue(x, y, 0);
-	LUA->PushNumber(value);
-	return 1;
+	UserData *ud = (UserData *)LUA->GetUserdata(stackPos);
+	return (Vector *)ud->data;
 }
 
 GMOD_MODULE_OPEN() {
@@ -26,9 +23,9 @@ GMOD_MODULE_OPEN() {
 		LUA->PushString("libnoise loaded!");
 		LUA->Call(1, 0);
 
-		
-		LUA->PushCFunction(testFunction);
-		LUA->SetField(-2, "NoiseTest");
+		LUA->CreateTable();
+			Modules::BillowModule::Register(state);
+		LUA->SetField(-2, "libnoise");
 
 	LUA->SetTable(-1);
 

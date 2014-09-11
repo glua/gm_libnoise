@@ -1,1 +1,2 @@
 xcopy /s /y C:\Users\Spencer\Documents\Projects\gm_libnoise\builds\windows\gmsv_libnoise_win32.dll F:\srcds\garrysmod\lua\bin\gmsv_libnoise_win32.dll
+xcopy /s /y C:\Users\Spencer\Documents\Projects\gm_libnoise\builds\windows\gmsv_libnoise_win32.pdb F:\srcds\garrysmod\lua\bin\gmsv_libnoise_win32.pdb
