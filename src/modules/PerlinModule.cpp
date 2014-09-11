@@ -1,18 +1,18 @@
-#include "BillowModule.h"
+#include "PerlinModule.h"
 
 namespace Modules {
-	namespace BillowModule {
+	namespace PerlinModule {
 
-		noise::module::Billow *FetchModule(lua_State *state, int iStackPos) {
+		noise::module::Perlin *FetchModule(lua_State *state, int iStackPos) {
 				if (!LUA->IsType(1, GarrysMod::Lua::Type::USERDATA)) {
 					LUA->ThrowError("No userdata.");
 					return NULL;
 				}
-				return *(noise::module::Billow**)LUA->GetUserdata(iStackPos);
+				return *(noise::module::Perlin**)LUA->GetUserdata(iStackPos);
 		}
 
 		int GetValue(lua_State* state) {
-			noise::module::Billow *module = FetchModule(state, 1);
+			noise::module::Perlin *module = FetchModule(state, 1);
 
 			LUA->CheckType(2, GarrysMod::Lua::Type::NUMBER);
 			LUA->CheckType(3, GarrysMod::Lua::Type::NUMBER);
@@ -29,19 +29,19 @@ namespace Modules {
 		}
 
 		int GetSourceModuleCount(lua_State* state) {
-			noise::module::Billow *module = FetchModule(state, 1);
+			noise::module::Perlin *module = FetchModule(state, 1);
 			LUA->PushNumber(module->GetSourceModuleCount());
 			return 1;
 		}
 
 		int GetSeed(lua_State* state) {
-			noise::module::Billow *module = FetchModule(state, 1);
+			noise::module::Perlin *module = FetchModule(state, 1);
 			LUA->PushNumber(module->GetSeed());
 			return 1;
 		}
 
 		int SetSeed(lua_State* state) {
-			noise::module::Billow *module = FetchModule(state, 1);
+			noise::module::Perlin *module = FetchModule(state, 1);
 			LUA->CheckType(2, GarrysMod::Lua::Type::NUMBER);
 			int value = (int)LUA->GetNumber(2);
 			module->SetSeed(value);
@@ -51,38 +51,38 @@ namespace Modules {
 		//
 
 		int GetFrequency(lua_State* state) {
-			noise::module::Billow *module = FetchModule(state, 1);
+			noise::module::Perlin *module = FetchModule(state, 1);
 			LUA->PushNumber(module->GetFrequency());
 			return 1;
 		}
 
 		int GetLacunarity(lua_State* state) {
-			noise::module::Billow *module = FetchModule(state, 1);
+			noise::module::Perlin *module = FetchModule(state, 1);
 			LUA->PushNumber(module->GetLacunarity());
 			return 1;
 		}
 
 		int GetNoiseQuality(lua_State* state) {
-			noise::module::Billow *module = FetchModule(state, 1);
+			noise::module::Perlin *module = FetchModule(state, 1);
 			LUA->PushNumber(module->GetNoiseQuality());
 			return 1;
 		}
 
 		int GetOctaveCount(lua_State* state) {
-			noise::module::Billow *module = FetchModule(state, 1);
+			noise::module::Perlin *module = FetchModule(state, 1);
 			LUA->PushNumber(module->GetOctaveCount());
 			return 1;
 		}
 
 		int GetPersistence(lua_State* state) {
-			noise::module::Billow *module = FetchModule(state, 1);
+			noise::module::Perlin *module = FetchModule(state, 1);
 			LUA->PushNumber(module->GetPersistence());
 			return 1;
 		}
 
 
 		int SetFrequency(lua_State* state) {
-			noise::module::Billow *module = FetchModule(state, 1);
+			noise::module::Perlin *module = FetchModule(state, 1);
 			LUA->CheckType(2, GarrysMod::Lua::Type::NUMBER);
 			double value = LUA->GetNumber(2);
 			module->SetFrequency(value);
@@ -90,7 +90,7 @@ namespace Modules {
 		}
 
 		int SetNoiseQuality(lua_State* state) {
-			noise::module::Billow *module = FetchModule(state, 1);
+			noise::module::Perlin *module = FetchModule(state, 1);
 			LUA->CheckType(2, GarrysMod::Lua::Type::NUMBER);
 			noise::NoiseQuality value = static_cast<noise::NoiseQuality>((int)LUA->GetNumber(2));
 			module->SetNoiseQuality(value);
@@ -98,7 +98,7 @@ namespace Modules {
 		}
 
 		int SetLacunarity(lua_State* state) {
-			noise::module::Billow *module = FetchModule(state, 1);
+			noise::module::Perlin *module = FetchModule(state, 1);
 			LUA->CheckType(2, GarrysMod::Lua::Type::NUMBER);
 			double value = LUA->GetNumber(2);
 			module->SetLacunarity(value);
@@ -106,7 +106,7 @@ namespace Modules {
 		}
 
 		int SetOctaveCount(lua_State* state) {
-			noise::module::Billow *module = FetchModule(state, 1);
+			noise::module::Perlin *module = FetchModule(state, 1);
 			LUA->CheckType(2, GarrysMod::Lua::Type::NUMBER);
 			int value = (int)LUA->GetNumber(2);
 			module->SetOctaveCount(value);
@@ -114,7 +114,7 @@ namespace Modules {
 		}
 
 		int SetPersistence(lua_State* state) {
-			noise::module::Billow *module = FetchModule(state, 1);
+			noise::module::Perlin *module = FetchModule(state, 1);
 			LUA->CheckType(2, GarrysMod::Lua::Type::NUMBER);
 			double value = LUA->GetNumber(2);
 			module->SetPersistence(value);
@@ -122,11 +122,11 @@ namespace Modules {
 		}
 
 		int CreateModule(lua_State* state) {
-			noise::module::Billow* newModule = new noise::module::Billow();
+			noise::module::Perlin* newModule = new noise::module::Perlin();
 
-			noise::module::Billow **ud = (noise::module::Billow **)LUA->NewUserdata(sizeof(noise::module::Billow*));
+			noise::module::Perlin **ud = (noise::module::Perlin **)LUA->NewUserdata(sizeof(noise::module::Perlin*));
 				*ud = newModule;
-				LUA->CreateMetaTableType("NoiseBillow", GarrysMod::Lua::Type::USERDATA);
+				LUA->CreateMetaTableType("NoisePerlin", GarrysMod::Lua::Type::USERDATA);
 			LUA->SetMetaTable(-2);
 			
 			return 1;
@@ -134,13 +134,13 @@ namespace Modules {
 
 		void Register(lua_State* state) {
 			LUA->PushCFunction(CreateModule);
-			LUA->SetField(-2, "Billow");
+			LUA->SetField(-2, "Perlin");
 
-			LUA->CreateMetaTableType("NoiseBillow", GarrysMod::Lua::Type::USERDATA);
+			LUA->CreateMetaTableType("NoisePerlin", GarrysMod::Lua::Type::USERDATA);
 				LUA->Push(-1);
 				LUA->SetField(-2, "__index");
 
-				LUA->PushString("NoiseBillow");
+				LUA->PushString("NoisePerlin");
 				LUA->SetField(-2, "__type");
 
 				AddMethod(state, GetValue, "GetValue");

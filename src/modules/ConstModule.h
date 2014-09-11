@@ -1,7 +1,7 @@
 #include "../Module.h"
 
 namespace Modules {
-	namespace BillowModule {
+	namespace ConstModule {
 		void Register(lua_State* state);	
 	}
 }

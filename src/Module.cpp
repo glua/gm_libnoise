@@ -1,5 +1,11 @@
 #include "Module.h"
 #include "modules/BillowModule.h"
+#include "modules/CheckerboardModule.h"
+#include "modules/ConstModule.h"
+#include "modules/CylindersModule.h"
+#include "modules/PerlinModule.h"
+#include "modules/RidgedMultiModule.h"
+#include "modules/VoronoiModule.h"
 
 using namespace GarrysMod::Lua;
 
@@ -25,6 +31,12 @@ GMOD_MODULE_OPEN() {
 
 		LUA->CreateTable();
 			Modules::BillowModule::Register(state);
+			Modules::CheckerboardModule::Register(state);
+			Modules::ConstModule::Register(state);
+			Modules::CylindersModule::Register(state);
+			Modules::PerlinModule::Register(state);
+			Modules::RidgedMultiModule::Register(state);
+			Modules::VoronoiModule::Register(state);
 		LUA->SetField(-2, "libnoise");
 
 	LUA->SetTable(-1);
